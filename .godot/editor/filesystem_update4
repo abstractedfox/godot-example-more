@@ -1,0 +1,4 @@
+res://main.tscn
+res://CharacterBody3D-enemy.gd
+res://CharacterBody3D-Player.gd
+res://main.gd
