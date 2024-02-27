@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://nsb4n7src1ua"]
+
+[ext_resource type="PackedScene" uid="uid://dgbvtaipvu80s" path="res://character_body_3d_player.tscn" id="1_4dq8t"]
+[ext_resource type="Script" path="res://main.gd" id="1_abej8"]
+[ext_resource type="PackedScene" uid="uid://cchh8pfllv21h" path="res://CharacterBody3D-enemy.tscn" id="2_hjp82"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ocg6l"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ybuo8"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="Curve3D" id="Curve3D_4ywwc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -6.8273, 0, -6.63607, 0, 0, 0, 0, 0, 0, 6.80198, 0, -6.72854, 0, 0, 0, 0, 0, 0, 6.67253, 0, 7.548, 0, 0, 0, 0, 0, 0, -7.6225, 0, 7.62197, 0, 0, 0, 0, 0, 0, -6.8273, 0, -6.63607),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_abej8")
+enemy = ExtResource("2_hjp82")
+
+[node name="StaticBody3D_Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D_Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0652466, 0, -0.0598755)
+shape = SubResource("BoxShape3D_ocg6l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D_Floor"]
+mesh = SubResource("BoxMesh_ybuo8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.485405, 0.87429, 0, -0.874289, -0.485405, 0, 14.8914, 0)
+shadow_enabled = true
+
+[node name="CharacterBody3D_Player" parent="." instance=ExtResource("1_4dq8t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.527083, 0)
+
+[node name="Marker3D_CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, -5.95416e-16, 2.4663e-16, 2.4663e-16, 0.707107, 0.707107, -5.95416e-16, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D_CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 19)
+projection = 1
+size = 19.0
+far = 100.0
+
+[node name="Path3D_SpawnPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_4ywwc")
+
+[node name="PathFollow3D_SpawnLocation" type="PathFollow3D" parent="Path3D_SpawnPath"]
+transform = Transform3D(0.00678458, 0, -0.999977, 0, 1, 0, 0.999977, 0, 0.00678458, -6.8273, 0, -6.63607)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

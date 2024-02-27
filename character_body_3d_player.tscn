@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgbvtaipvu80s"]
+
+[ext_resource type="Script" path="res://CharacterBody3D-Player.gd" id="1_uoxv0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kpdid"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgec8"]
+albedo_color = Color(0, 0.247059, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w55v2"]
+
+[node name="CharacterBody3D_Player" type="CharacterBody3D"]
+script = ExtResource("1_uoxv0")
+
+[node name="CollisionShape3D_PlayerCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_kpdid")
+
+[node name="Node3D_PlayerMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D_PlayerMesh"]
+material_override = SubResource("StandardMaterial3D_tgec8")
+mesh = SubResource("SphereMesh_w55v2")

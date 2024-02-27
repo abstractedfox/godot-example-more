@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cchh8pfllv21h"]
+
+[ext_resource type="Script" path="res://CharacterBody3D-enemy.gd" id="1_mfcol"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6cu25"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8kqf"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_46a1l"]
+
+[node name="CharacterBody3D-Enemy" type="CharacterBody3D"]
+script = ExtResource("1_mfcol")
+
+[node name="Node3D-Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D-Pivot"]
+mesh = SubResource("SphereMesh_6cu25")
+surface_material_override/0 = SubResource("StandardMaterial3D_b8kqf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_46a1l")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.595032, -0.574307, -0.543076, 1.19006, 1.14861, 1.08615)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
