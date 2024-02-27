@@ -1,9 +1,0 @@
-ea4bc82a6ad023ab7ee23ee620429895
-::res://::1709007881
-CharacterBody3D-enemy.gd::GDScript::-1::1709001082::0::1::::<>CharacterBody3D<>::
-CharacterBody3D-enemy.tscn::PackedScene::4928154445178533215::1709006916::0::1::::<><>::res://CharacterBody3D-enemy.gd
-CharacterBody3D-Player.gd::GDScript::-1::1709004230::0::1::::<>CharacterBody3D<>::
-character_body_3d_player.tscn::PackedScene::7583768490662700856::1709006916::0::1::::<><>::res://CharacterBody3D-Player.gd
-icon.svg::CompressedTexture2D::5549228897213586369::1708574538::1709007882::1::::<><>::
-main.gd::GDScript::-1::1709006906::0::1::::<>Node3D<>::
-main.tscn::PackedScene::949727004961463280::1709006916::0::1::::<><>::uid://dgbvtaipvu80s::::res://character_body_3d_player.tscn<>res://main.gd<>uid://cchh8pfllv21h::::res://CharacterBody3D-enemy.tscn
