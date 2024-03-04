@@ -7,6 +7,12 @@ extends CharacterBody3D
  
 @export var speed = 14
 @export var fall_acceleration = 75
+
+#Set to 'true' for inputs to affect the character's acceleration rather than speed
+@export var accelerationMode = true
+@export var accelerationAmount = 0.5
+@export var maxSpeed = 10
+
 var target_velocity = Vector3.ZERO
 
 func _physics_process(delta):
@@ -34,15 +40,28 @@ func _physics_process(delta):
 	$Node3D_PlayerMesh.basis = Basis.looking_at(inputDirection)
 	
 	#Ground velocity (moving forward/back/left/right)
-	target_velocity.x = inputDirection.x * speed
-	target_velocity.z = inputDirection.z * speed
+	if not accelerationMode:
+		target_velocity.x = inputDirection.x * speed 
+		target_velocity.z = inputDirection.z * speed
+	else:
+		target_velocity.x = inputDirection.x * accelerationAmount
+		target_velocity.z = inputDirection.z * accelerationAmount
+		
 	
 	#Vertical velocity (gravity)
 	if not is_on_floor():
 		target_velocity.y -= fall_acceleration * delta
 		
 	#velocity is inherited from CharacterBody3D. Is used and can be modified by move_and_slide()
-	velocity = target_velocity
+	if not accelerationMode:
+		velocity = target_velocity
+	else:
+		velocity += target_velocity * delta
+		
+	var totalSpeed = abs(velocity.x) + abs(velocity.z)
+	if totalSpeed > maxSpeed:
+		velocity.x *= (maxSpeed / totalSpeed)
+		velocity.z *= (maxSpeed / totalSpeed)
 	
 	#Guide says this (paraphrasing) 'smoothes the motion if it hits a wall'
 	#Both works off of and affects the 'velocity' property 

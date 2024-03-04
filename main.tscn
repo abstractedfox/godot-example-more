@@ -20,6 +20,7 @@ point_count = 5
 [node name="Main" type="Node3D"]
 script = ExtResource("1_abej8")
 enemy = ExtResource("2_hjp82")
+enemiesEnabled = false
 
 [node name="StaticBody3D_Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -37,6 +38,8 @@ shadow_enabled = true
 
 [node name="CharacterBody3D_Player" parent="." instance=ExtResource("1_4dq8t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.527083, 0)
+accelerationAmount = 10.0
+maxSpeed = 40
 
 [node name="Marker3D_CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, -5.95416e-16, 2.4663e-16, 2.4663e-16, 0.707107, 0.707107, -5.95416e-16, -0.707107, 0.707107, 0, 0, 0)

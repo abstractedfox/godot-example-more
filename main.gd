@@ -8,6 +8,7 @@ extends Node3D
 #PackedScene holds a reference to a scene
 #apparently it can also be used to save a node to a file!
 @export var enemy: PackedScene
+@export var enemiesEnabled = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,9 @@ func _process(delta):
 
 
 func _on_enemy_timer_timeout():
+	if not enemiesEnabled:
+		return
+	
 	#note that the 'enemy' object here is the one we declared at the top of this file
 	var enemyInstance = enemy.instantiate()
 

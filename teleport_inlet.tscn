@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctv0kh2rsj66x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lx6d7"]
+
+[node name="Teleport_Inlet" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lx6d7")
