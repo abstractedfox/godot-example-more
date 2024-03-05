@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://nsb4n7src1ua"]
+[gd_scene load_steps=9 format=3 uid="uid://nsb4n7src1ua"]
 
 [ext_resource type="PackedScene" uid="uid://dgbvtaipvu80s" path="res://character_body_3d_player.tscn" id="1_4dq8t"]
 [ext_resource type="Script" path="res://main.gd" id="1_abej8"]
 [ext_resource type="PackedScene" uid="uid://cchh8pfllv21h" path="res://CharacterBody3D-enemy.tscn" id="2_hjp82"]
+[ext_resource type="PackedScene" uid="uid://ctv0kh2rsj66x" path="res://teleport_inlet.tscn" id="3_72cx4"]
+[ext_resource type="PackedScene" uid="uid://rq58tuu8rnkc" path="res://teleport_outlet.tscn" id="4_8l5ev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ocg6l"]
 size = Vector3(60, 2, 60)
@@ -37,7 +39,7 @@ transform = Transform3D(1, 0, 0, 0, -0.485405, 0.87429, 0, -0.874289, -0.485405,
 shadow_enabled = true
 
 [node name="CharacterBody3D_Player" parent="." instance=ExtResource("1_4dq8t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.527083, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.917779, 0)
 accelerationAmount = 10.0
 maxSpeed = 40
 
@@ -59,5 +61,21 @@ transform = Transform3D(0.00678458, 0, -0.999977, 0, 1, 0, 0.999977, 0, 0.006784
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="borders" type="Node3D" parent="."]
+
+[node name="TeleportOutletR" parent="borders" instance=ExtResource("4_8l5ev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9759, 0.719701, 2.08165e-12)
+
+[node name="Teleport_InletL" parent="borders" node_paths=PackedStringArray("outlet") instance=ExtResource("3_72cx4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.549, 0.989)
+outlet = NodePath("../TeleportOutletR")
+
+[node name="Teleport_Inlet_R" parent="borders" node_paths=PackedStringArray("outlet") instance=ExtResource("3_72cx4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.549, 0.929)
+outlet = NodePath("../Teleport_InletL")
+
+[node name="TeleportOutletL" parent="borders" instance=ExtResource("4_8l5ev")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.073, 0.684, 2.08165e-12)
 
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
